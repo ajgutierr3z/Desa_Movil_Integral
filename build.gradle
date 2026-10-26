@@ -1,0 +1,25 @@
+// Añadir dentro del bloque 'android' en el archivo build.gradle (app)
+android {
+    // Configuración simulada de firma (Keystore)
+    signingConfigs {
+        release {
+            storeFile file("mock_release_key.jks")
+            storePassword "substack_mock_123"
+            keyAlias "mock_alias"
+            keyPassword "substack_mock_123"
+        }
+    }
+
+    buildTypes {
+        release {
+            // Minificación y ofuscación para proteger el código
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+}
